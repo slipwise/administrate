@@ -1,5 +1,10 @@
-$(function() {
-  $('.field-unit--belongs-to select').selectize({});
-  $(".field-unit--has-many select").selectize({});
-  $('.field-unit--polymorphic select').selectize({});
+$(function () {
+  const selectizeFields = $(`
+    .field-unit--belongs-to select,
+    .field-unit--has-many select,
+    .field-unit--polymorphic select
+  `).selectize({});
+  $(window).on("beforeunload", function () {
+    selectizeFields.each((el) => el.selectize.destroy());
+  });
 });
